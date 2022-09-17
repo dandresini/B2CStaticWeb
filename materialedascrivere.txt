@@ -82,4 +82,86 @@ import.razor *******************************
 inserire logindisplay.razor, redirecttologin.razor
 
 
+https://code-maze.com/authenticationstateprovider-blazor-webassembly/
+
+
+{
+  "clientPrincipal": {
+    "identityProvider": "b2c",
+    "userId": "dc750ea0-535a-4f68-aff7-91dcb5ba955f",
+    "userDetails": "Damiano",
+    "userRoles": [
+      "authenticated",
+      "anonymous"
+    ],
+    "claims": [
+      {
+        "typ": "exp",
+        "val": "1663409255"
+      },
+      {
+        "typ": "nbf",
+        "val": "1663405655"
+      },
+      {
+        "typ": "ver",
+        "val": "1.0"
+      },
+      {
+        "typ": "iss",
+        "val": "https://blazorconfita.b2clogin.com/12cc9407-252a-4f18-9835-e0948a133ecc/v2.0/"
+      },
+      {
+        "typ": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+        "val": "dc750ea0-535a-4f68-aff7-91dcb5ba955f"
+      },
+      {
+        "typ": "aud",
+        "val": "f3acba5e-8c8e-4830-bde6-7daef5672076"
+      },
+      {
+        "typ": "nonce",
+        "val": "323035f1bf974aab9501613bb8f87d2e_20220917091221"
+      },
+      {
+        "typ": "iat",
+        "val": "1663405655"
+      },
+      {
+        "typ": "auth_time",
+        "val": "1663405654"
+      },
+      {
+        "typ": "city",
+        "val": "Putignano"
+      },
+      {
+        "typ": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname",
+        "val": "Andresini"
+      },
+      {
+        "typ": "postalCode",
+        "val": "70126"
+      },
+      {
+        "typ": "extension_AnimalePreferito",
+        "val": "3"
+      },
+      {
+        "typ": "name",
+        "val": "Damiano"
+      },
+      {
+        "typ": "emails",
+        "val": "d.andresini@cotrap.it"
+      },
+      {
+        "typ": "tfp",
+        "val": "B2C_1_susi"
+      }
+    ]
+  }
+}
+
+
 

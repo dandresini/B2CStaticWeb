@@ -10,7 +10,10 @@
       "allowedRoles": [ "authenticated" ],
       "rewrite": "/.auth/logout"
     },
-    
+    {
+      "route": "/.auth/me",
+      "allowedRoles": ["authenticated" ]
+    },
     {
       "route": "/.auth/login/aad",
       "allowedRoles": [ "anonymous", "authenticated" ],
