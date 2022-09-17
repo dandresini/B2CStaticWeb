@@ -6,7 +6,7 @@
       "rewrite": "/.auth/login/b2c"
     },
     {
-      "route": "/logout",
+      "route": "/logout*",
       "allowedRoles": [ "authenticated" ],
       "rewrite": "/.auth/logout"
     },
@@ -77,7 +77,7 @@
               "clientSecretSettingName": "B2C_CLIENT_SECRET"
             },
             "openIdConnectConfiguration": {
-              "wellKnownOpenIdConfiguration": "B2C_OPENIDURI"
+              "wellKnownOpenIdConfiguration": "https://blazorconfITA.b2clogin.com/blazorconfITA.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
             }
           },
           "login": {
