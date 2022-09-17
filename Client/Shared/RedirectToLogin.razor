@@ -3,6 +3,6 @@
 @code {
     protected override void OnInitialized()
     {
-        Navigation.NavigateTo($"/login?post_login_redirect_uri={Uri.EscapeDataString(Navigation.Uri)}");
+        Navigation.NavigateTo($"/.auth/login/b2c?post_login_redirect_uri={Uri.EscapeDataString(Navigation.Uri)}");
     }
 }

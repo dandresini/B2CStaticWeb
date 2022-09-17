@@ -5,7 +5,7 @@
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity?.Name!
-        <button class="nav-link btn btn-link" @onclick="(e)=>BeginLogout(e)">Log out</button>
+        <button class="nav-link btn btn-link" @onclick="@(async () => await BeginLogout())">Log out</button>
     </Authorized>
     <NotAuthorized>
         <a href="/login">Log in</a>
@@ -13,8 +13,8 @@
 </AuthorizeView>
 
 @code {
-    private void BeginLogout(MouseEventArgs args)
+    private async Task BeginLogout()
     {
-        Navigation.NavigateTo("/logout");
+        Navigation.NavigateTo("/.auth/logout");
     }
 }
