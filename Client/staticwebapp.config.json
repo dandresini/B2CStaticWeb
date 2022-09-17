@@ -6,13 +6,13 @@
       "rewrite": "/.auth/login/b2c"
     },
     {
-      "route": "/logout*",
+      "route": "/logout",
       "allowedRoles": [ "authenticated" ],
       "rewrite": "/.auth/logout"
     },
     {
       "route": "/.auth/me",
-      "allowedRoles": ["authenticated" ]
+      "allowedRoles": ["authenticated"]
     },
     {
       "route": "/.auth/login/aad",
@@ -64,7 +64,7 @@
   "responseOverrides": {
     "401": {
       "statusCode": 302,
-      "redirect": "/login"
+      "redirect": "/.auth/login/b2c"
     }
   },
   "auth": {
