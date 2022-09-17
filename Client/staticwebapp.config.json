@@ -77,7 +77,7 @@
               "clientSecretSettingName": "B2C_CLIENT_SECRET"
             },
             "openIdConnectConfiguration": {
-              "wellKnownOpenIdConfiguration": "https://blazorconfITA.b2clogin.com/blazorconfITA.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
+              "wellKnownOpenIdConfiguration": "B2C_OPENIDURI"
             }
           },
           "login": {
