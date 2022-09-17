@@ -1,6 +1,8 @@
 ﻿@page "/fetchdata"
 @using BlazorApp.Shared 
+
 @inject HttpClient Http
+@attribute [Authorize]
 
 <h1>Weather forecast</h1>
 
@@ -44,9 +46,9 @@ else
         {
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/WeatherForecast") ?? new WeatherForecast[]{};
         }
-        catch (Exception ex)
+        catch (AccessTokenNotAvailableException exception)
         {
-            Console.WriteLine(ex.ToString());
+            exception.Redirect();
         }
     }
 }
