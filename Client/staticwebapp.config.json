@@ -1,12 +1,12 @@
 {
   "routes": [
     {
-      "route": "/login",
+      "route": "/login*",
       "allowedRoles": [ "anonymous" ],
       "rewrite": "/.auth/login/b2c"
     },
     {
-      "route": "/logout",
+      "route": "/logout*",
       "allowedRoles": [ "authenticated" ],
       "rewrite": "/.auth/logout"
     },
