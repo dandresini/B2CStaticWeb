@@ -49,7 +49,7 @@ else
         catch (AccessTokenNotAvailableException exception)
         {
 
-            navigationManager.NavigateTo($"/.auth/login/b2c?post_login_redirect_uri={navigationManager.Uri}");
+            navigationManager.NavigateTo($"/.auth/login/b2c?post_login_redirect_uri={navigationManager.Uri}",true);
             //exception.Redirect();
 
         }
