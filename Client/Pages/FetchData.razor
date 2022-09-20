@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 @using BlazorApp.Shared 
-
+@inject NavigationManager navigationManager; 
 @inject HttpClient Http
 @attribute [Authorize]
 
@@ -48,7 +48,11 @@ else
         }
         catch (AccessTokenNotAvailableException exception)
         {
-            exception.Redirect();
+
+            navigationManager.NavigateTo("/login?post_login_redirect_uri=" + navigationManager.Uri);
+            Console.WriteLine(exception.Message);
+            //exception.Redirect();
+
         }
     }
 }
