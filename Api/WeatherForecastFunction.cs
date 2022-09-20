@@ -11,7 +11,6 @@ using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace BlazorApp.Api
 {
@@ -40,29 +39,10 @@ namespace BlazorApp.Api
         [FunctionName("WeatherForecast")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log, ClaimsPrincipal claimIdentity)
+            ILogger log)
         {
 
             StringBuilder strInformazioni= new StringBuilder();
-            strInformazioni.Append("Controllo tramite claimIdentity");
-            strInformazioni.Append("User ID: " + claimIdentity.Identity.Name);
-            strInformazioni.Append("Claim Type : Claim Value");
-            foreach (Claim claim in claimIdentity.Claims)
-                strInformazioni.Append(claim.Type + " : " + claim.Value + "\n");
-            log.LogInformation(strInformazioni.ToString());
-
-            strInformazioni.Clear();
-
-            strInformazioni.Append("Controllo tramite claimIdentity");
-            ClaimsPrincipal claimIdentityreq = req.HttpContext.User;
-            strInformazioni.Append("User ID: " + claimIdentityreq.Identity.Name);
-            strInformazioni.Append("Claim Type : Claim Value");
-            foreach (Claim claim in claimIdentityreq.Claims)
-                strInformazioni.Append(claim.Type + " : " + claim.Value + "\n");
-            log.LogInformation(strInformazioni.ToString());
-
-            strInformazioni.Clear();
-
             strInformazioni.Append("Controllo tramite X-MS Header");
             var principal_name = req.Headers["X-MS-CLIENT-PRINCIPAL-NAME"].FirstOrDefault();
             var principal_Id = req.Headers["X-MS-CLIENT-PRINCIPAL-ID"].FirstOrDefault();
