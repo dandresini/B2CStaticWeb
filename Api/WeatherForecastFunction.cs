@@ -82,20 +82,6 @@ namespace BlazorApp.Api
 
             strInformazioni.Clear();
 
-            strInformazioni.Append("Controllo tramite token");
-            var userIDToken = req.Headers["X-MS-TOKEN-AAD-ID-TOKEN"];
-            strInformazioni.Append("Encrypted JWT: " + userIDToken);
-            var jwttoken = new JwtSecurityTokenHandler().ReadJwtToken(userIDToken) as JwtSecurityToken;
-            strInformazioni.Append("Decrypted JWT:");
-            strInformazioni.Append("Claim Type : Claim Value");
-            foreach (Claim claim in jwttoken.Claims)
-            {
-                strInformazioni.Append(claim.Type + " : " + claim.Value + "\n");
-            }
-            log.LogInformation(strInformazioni.ToString());
-
-            strInformazioni.Clear();
-
 
 
             var randomNumber = new Random();
