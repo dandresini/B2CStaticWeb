@@ -39,10 +39,20 @@ namespace BlazorApp.Api
         [FunctionName("WeatherForecast")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ClaimsPrincipal principal)
         {
 
+            
+
             StringBuilder strInformazioni= new StringBuilder();
+
+            strInformazioni.Append("Controllo tramite ClaimsPrincipal");
+            foreach(var claim in principal.Claims)
+                strInformazioni.Append($"{claim.Type}->{claim.Value}");
+            log.LogInformation(strInformazioni.ToString());
+
+            strInformazioni.Clear();
+
             strInformazioni.Append("Controllo tramite X-MS Header");
             var principal_name = req.Headers["X-MS-CLIENT-PRINCIPAL-NAME"].FirstOrDefault();
             var principal_Id = req.Headers["X-MS-CLIENT-PRINCIPAL-ID"].FirstOrDefault();
