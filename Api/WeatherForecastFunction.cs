@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlazorApp.Api
 {
@@ -37,6 +38,7 @@ namespace BlazorApp.Api
         }
 
         [FunctionName("WeatherForecast")]
+        [Authorize]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log, ClaimsPrincipal principal)
