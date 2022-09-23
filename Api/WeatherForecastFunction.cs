@@ -42,7 +42,7 @@ namespace BlazorApp.Api
             ILogger log, ClaimsPrincipal principal)
         {
 
-            
+            log.LogInformation("B2C_CLIENT_ID: " + Environment.GetEnvironmentVariable("B2C_CLIENT_ID"));
 
             StringBuilder strInformazioni= new StringBuilder();
 
