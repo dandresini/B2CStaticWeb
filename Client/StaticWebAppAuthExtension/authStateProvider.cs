@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Net.Http.Json;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 
 namespace BlazorApp.Client.StaticWebAppAuthExtension
 {
