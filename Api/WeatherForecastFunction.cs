@@ -71,6 +71,8 @@ namespace BlazorApp.Api
             log.LogInformation(strInformazioni.ToString());
 
             log.LogInformation("Call graphClient");
+            log.LogInformation($"tenant:{Environment.GetEnvironmentVariable("B2C_TENANTID")},clientid:{Environment.GetEnvironmentVariable("B2C_CLIENT_ID")}, secret:{Environment.GetEnvironmentVariable("B2C_CLIENT_SECRET")}");
+
             var user = await graphClient.Users[$"{principal_Id}"]
                        .Request()
                        .GetAsync();
