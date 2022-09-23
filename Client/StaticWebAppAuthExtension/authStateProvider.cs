@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Net.Http.Json;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 
 namespace BlazorApp.Client.StaticWebAppAuthExtension
@@ -46,6 +47,12 @@ namespace BlazorApp.Client.StaticWebAppAuthExtension
                     var identity = new ClaimsIdentity(principal.IdentityProvider);
                     if (principal.UserDetails is not null) identity.AddClaim(new Claim(ClaimTypes.Name, principal.UserDetails));
                     if (principal.UserRoles is not null) identity.AddClaims(principal.UserRoles.Select(r => new Claim(ClaimTypes.Role, r)));
+                    if (principal.Claims is not null)
+                    {
+                        foreach (var claim in principal.Claims.Where(c => c.Typ != "" && c.Val != ""))
+                            identity.AddClaim(new Claim(claim.Typ, claim.Val));
+                    }
+
                     return new AuthenticationState(new ClaimsPrincipal(identity));
 
                 }
