@@ -7,16 +7,23 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
 using BlazorApp.Shared;
-using System.Security.Claims;
 using System.Text;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Graph;
+using System.Threading.Tasks;
 
 namespace BlazorApp.Api
 {
-    public static class WeatherForecastFunction
+    public class WeatherForecastFunction
     {
+        private readonly GraphServiceClient graphClient;
+
+        public WeatherForecastFunction(GraphServiceClient GraphClient)
+        {
+            graphClient= GraphClient;
+        }
+
         private static string GetSummary(int temp)
         {
             var summary = "Mild";
@@ -39,21 +46,12 @@ namespace BlazorApp.Api
 
         [FunctionName("WeatherForecast")]
         [Authorize]
-        public static IActionResult Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log, ClaimsPrincipal principal)
+            ILogger log)
         {
 
-            log.LogInformation("B2C_CLIENT_ID: " + Environment.GetEnvironmentVariable("B2C_CLIENT_ID")??"VUOTO");
-
             StringBuilder strInformazioni= new StringBuilder();
-
-            strInformazioni.Append("Controllo tramite ClaimsPrincipal");
-            foreach(var claim in principal.Claims)
-                strInformazioni.Append($"{claim.Type}->{claim.Value}");
-            log.LogInformation(strInformazioni.ToString());
-
-            strInformazioni.Clear();
 
             strInformazioni.Append("Controllo tramite X-MS Header");
             var principal_name = req.Headers["X-MS-CLIENT-PRINCIPAL-NAME"].FirstOrDefault();
@@ -68,11 +66,15 @@ namespace BlazorApp.Api
 
             //Decode the Client Principal
             byte[] decodedBytes = Convert.FromBase64String(clientPrincipalEncoded);
-            string clientPrincipalDecoded = System.Text.Encoding.Default.GetString(decodedBytes);
+            string clientPrincipalDecoded = Encoding.Default.GetString(decodedBytes);
             strInformazioni.Append(clientPrincipalDecoded);
             log.LogInformation(strInformazioni.ToString());
 
-            strInformazioni.Clear();
+            log.LogInformation("Call graphClient");
+            var user = await graphClient.Users[$"{principal_Id}"]
+                       .Request()
+                       .GetAsync();
+            log.LogInformation("Risultato" + JsonSerializer.Serialize(user));
 
 
 
