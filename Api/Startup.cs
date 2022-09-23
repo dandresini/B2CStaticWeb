@@ -3,8 +3,11 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
 using System;
+using System.Xml.Linq;
 
-[assembly: OwinStartup(typeof(BlazorApp.Api.Startup))]
+
+[assembly: FunctionsStartup(typeof(BlazorApp.Api.Startup))]
+
 
 namespace BlazorApp.Api
 {
