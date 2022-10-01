@@ -10,7 +10,6 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Graph;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 
 namespace BlazorApp.Api
@@ -52,17 +51,19 @@ namespace BlazorApp.Api
             ILogger log)
         {
             var principal = new ClientPrincipal();
-
+            log.LogInformation("verifica x-ms-client-principal");
             if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
             {
+
                 var data = header[0];
                 var decoded = Convert.FromBase64String(data);
                 var json = Encoding.UTF8.GetString(decoded);
-                principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                principal = JsonSerializer.Deserialize<ClientPrincipal>(json);
             }
-
+            
             principal.UserRoles = principal.UserRoles?.Except(new string[] { "anonymous" }, StringComparer.CurrentCultureIgnoreCase);
-
+            log.LogInformation($"fine verifica x-ms-client-principal {principal.UserId} - {principal.UserRoles.Count()}");
+            
             if (!principal.UserRoles?.Any() ?? true)
             {
 
@@ -71,6 +72,7 @@ namespace BlazorApp.Api
                 var user = await graphClient.Users[$"{principal.UserId}"]
                            .Request()
                            .GetAsync();
+
                 log.LogInformation("Risultato" + JsonSerializer.Serialize(user));
 
                 var randomNumber = new Random();
