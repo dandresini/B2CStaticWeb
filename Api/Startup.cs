@@ -14,7 +14,7 @@ namespace BlazorApp.Api
         public override void Configure(IFunctionsHostBuilder builder)
         {
             {
-                builder.Services.AddTransient(implementationFactory =>
+                builder.Services.AddScoped(implementationFactory =>
                 {
                     TokenCredentialOptions options = new TokenCredentialOptions
                     {
