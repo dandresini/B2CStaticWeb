@@ -60,9 +60,10 @@ namespace BlazorApp.Api
                 var json = Encoding.UTF8.GetString(decoded);
                 principal = JsonSerializer.Deserialize<ClientPrincipal>(json);
             }
-            
+            log.LogInformation("fine verifica x-ms-client-principal");
+
             principal.UserRoles = principal.UserRoles?.Except(new string[] { "anonymous" }, StringComparer.CurrentCultureIgnoreCase);
-            log.LogInformation($"fine verifica x-ms-client-principal {principal.UserId} - {principal.UserRoles.Count()}");
+            log.LogInformation($"fine verifica x-ms-client-principal {principal.UserId} - {principal.UserRoles?.Any()}");
             
             if (!principal.UserRoles?.Any() ?? true)
             {
