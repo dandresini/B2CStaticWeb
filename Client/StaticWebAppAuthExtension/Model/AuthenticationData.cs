@@ -1,4 +1,6 @@
-﻿namespace BlazorApp.Client.StaticWebAppAuthExtension.Model
+﻿using BlazorApp.Shared;
+
+namespace BlazorApp.Client.StaticWebAppAuthExtension.Model
 {
     public class AuthenticationData
     {
